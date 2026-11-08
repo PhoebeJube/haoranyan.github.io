@@ -2,9 +2,795 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Haoran Yan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Haoran Yan | Narrative Design Portfolio</title>
+
+    <style>
+        :root {
+            --background: #f4f1ea;
+            --surface: #ebe7de;
+            --text: #1d1d1b;
+            --muted: #686761;
+            --accent: #47695a;
+            --border: #cbc6bb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.65;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        /* ---------- Navigation ---------- */
+
+        nav {
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- Hero ---------- */
+
+        .hero {
+            padding: 110px 0 100px;
+        }
+
+        .eyebrow {
+            margin-bottom: 22px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: normal;
+            margin-top: 0;
+        }
+
+        h1 {
+            max-width: 950px;
+            margin-bottom: 26px;
+            font-size: clamp(58px, 9vw, 118px);
+            line-height: 0.93;
+            letter-spacing: -0.045em;
+        }
+
+        .hero-role {
+            margin: 0 0 24px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(26px, 4vw, 44px);
+            line-height: 1.15;
+        }
+
+        .hero-intro {
+            max-width: 680px;
+            margin: 0;
+            font-size: 18px;
+            color: var(--muted);
+        }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 38px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            border: 1px solid var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .button.primary {
+            background: var(--text);
+            color: var(--background);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ---------- General sections ---------- */
+
+        section {
+            padding: 90px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-label {
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .section-title {
+            max-width: 850px;
+            margin-bottom: 38px;
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1;
+            letter-spacing: -0.025em;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 80px;
+        }
+
+        .about-grid p {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .about-grid p + p {
+            margin-top: 20px;
+        }
+
+        /* ---------- Project ---------- */
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .tag {
+            padding: 7px 11px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .project-description {
+            max-width: 800px;
+            margin-bottom: 50px;
+            font-size: 19px;
+        }
+
+        .project-image {
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .caption {
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 70px;
+            margin-top: 70px;
+        }
+
+        .role-grid h3 {
+            font-size: 34px;
+        }
+
+        .role-grid ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 17px;
+        }
+
+        .role-grid li {
+            margin-bottom: 11px;
+        }
+
+        /* ---------- Work samples ---------- */
+
+        .work-item {
+            display: grid;
+            grid-template-columns: 0.75fr 1.45fr;
+            gap: 65px;
+            padding: 70px 0;
+            border-top: 1px solid var(--border);
+            align-items: start;
+        }
+
+        .work-item:first-of-type {
+            border-top: 0;
+        }
+
+        .work-number {
+            margin-bottom: 18px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .work-item h3 {
+            margin-bottom: 22px;
+            font-size: 38px;
+            line-height: 1.1;
+        }
+
+        .work-item p {
+            margin-top: 0;
+            font-size: 17px;
+            color: var(--muted);
+        }
+
+        .work-image {
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .sheet-image {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        /* ---------- Video ---------- */
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .demo-description {
+            max-width: 750px;
+            margin-bottom: 38px;
+            font-size: 18px;
+            color: var(--muted);
+        }
+
+        /* ---------- Play ---------- */
+
+        .play-box {
+            display: grid;
+            grid-template-columns: 1.5fr 0.8fr;
+            gap: 60px;
+            padding: 55px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .play-box h3 {
+            margin-bottom: 18px;
+            font-size: 42px;
+        }
+
+        .play-box p {
+            max-width: 650px;
+            font-size: 17px;
+        }
+
+        .password {
+            align-self: center;
+            padding: 28px;
+            background: var(--background);
+            border: 1px solid var(--border);
+        }
+
+        .password-label {
+            margin-bottom: 7px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+        }
+
+        .password-code {
+            margin: 0;
+            font-family: monospace;
+            font-size: 24px;
+        }
+
+        /* ---------- Footer ---------- */
+
+        footer {
+            padding: 55px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ---------- Mobile ---------- */
+
+        @media (max-width: 780px) {
+            .container {
+                width: min(100% - 30px, 1100px);
+            }
+
+            .nav-inner {
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-direction: column;
+            }
+
+            .hero {
+                padding: 75px 0;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .about-grid,
+            .role-grid,
+            .work-item,
+            .play-box {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .play-box {
+                padding: 30px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Haoran Yan</h1>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-inner">
+            <a class="nav-name" href="#">Haoran Yan</a>
+
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#project">A Way Home</a>
+                <a href="#work">Narrative Work</a>
+                <a href="#demo">Demo</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+
+            <div class="eyebrow">Narrative Design Portfolio</div>
+
+            <h1>Haoran Yan</h1>
+
+            <p class="hero-role">
+                Game Writer &amp; Narrative Designer
+            </p>
+
+            <p class="hero-intro">
+                I’m a Media Studies student at the University of Alberta interested
+                in game writing, dialogue, and narrative systems. My work focuses on
+                finding ways for story and gameplay to support each other.
+            </p>
+
+            <div class="hero-links">
+                <a class="button primary" href="#project">View My Work</a>
+
+                <a class="button"
+                   href="https://amoveftw.itch.io/a-way-home-vertical-slice"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Play A Way Home ↗
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+
+            <div class="section-label">About Me</div>
+
+            <div class="about-grid">
+
+                <h2 class="section-title">
+                    Writing stories that live inside the game.
+                </h2>
+
+                <div>
+                    <p>
+                        I’m a Media Studies student at the University of Alberta
+                        with an interest in game writing and narrative design.
+                        I especially enjoy working on dialogue, character relationships,
+                        and story systems that respond to what the player is doing.
+                    </p>
+
+                    <p>
+                        On a team, I can contribute as a writer and narrative designer
+                        while also working closely with designers and programmers to
+                        implement story content. I’m comfortable revising dialogue,
+                        prototyping narrative systems, and adjusting scenes as the
+                        game changes during development.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Featured Project -->
+    <section id="project">
+        <div class="container">
+
+            <div class="section-label">Featured Project</div>
+
+            <h2 class="section-title">
+                A Way Home
+            </h2>
+
+            <div class="project-meta">
+                <span class="tag">2D Puzzle-Platformer</span>
+                <span class="tag">Unity</span>
+                <span class="tag">7-Person Team</span>
+                <span class="tag">CMPUT 250</span>
+                <span class="tag">Lead Writer / Narrative Designer</span>
+            </div>
+
+            <p class="project-description">
+                <em>A Way Home</em> follows a girl and a spirit cat travelling
+                through a strange environment together. Players switch between
+                the two characters and use their different abilities to progress
+                through each level. As they explore, collectibles, dialogue, and
+                memory scenes gradually reveal pieces of their shared past.
+            </p>
+
+            <div class="project-image">
+                <img src="gameplay.png"
+                     alt="Gameplay from A Way Home showing the girl and spirit cat">
+            </div>
+
+            <p class="caption">
+                Gameplay from the current vertical slice of A Way Home.
+            </p>
+
+
+            <div class="role-grid">
+
+                <div>
+                    <div class="section-label">My Role</div>
+
+                    <h3>
+                        Lead Writer &amp;<br>
+                        Narrative Designer
+                    </h3>
+                </div>
+
+                <div>
+                    <ul>
+                        <li>
+                            Led narrative design and writing for a seven-person
+                            multidisciplinary team.
+                        </li>
+
+                        <li>
+                            Wrote story content and dialogue for the girl, her father,
+                            and other narrative sequences.
+                        </li>
+
+                        <li>
+                            Helped design and implement the collectible system that
+                            connects exploration to narrative progression.
+                        </li>
+
+                        <li>
+                            Worked on dialogue interactions and the visual novel-style
+                            system used for memory and flashback scenes.
+                        </li>
+
+                        <li>
+                            Collaborated with design and programming to place narrative
+                            moments into levels and revise their pacing during playtesting.
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Narrative Work -->
+    <section id="work">
+        <div class="container">
+
+            <div class="section-label">Selected Work</div>
+
+            <h2 class="section-title">
+                Narrative Design Work
+            </h2>
+
+
+            <!-- Work Sample 1 -->
+            <article class="work-item">
+
+                <div>
+                    <div class="work-number">01</div>
+
+                    <h3>
+                        Dialogue &amp; Narrative Progression
+                    </h3>
+
+                    <p>
+                        Dialogue is integrated into the level rather than being kept
+                        separate from gameplay. I worked on writing and implementing
+                        conversations that appear as the player explores, including
+                        interactions connected to collectibles and story progression.
+                    </p>
+
+                    <p>
+                        I also revise dialogue after playing through the surrounding
+                        platforming so that scenes fit the pace of the level instead
+                        of interrupting it for too long.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="work-image">
+                        <img src="dialogue.png"
+                             alt="Dialogue appearing during gameplay in A Way Home">
+                    </div>
+
+                    <p class="caption">
+                        Dialogue displayed directly inside a gameplay section.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- Work Sample 2 -->
+            <article class="work-item">
+
+                <div>
+                    <div class="work-number">02</div>
+
+                    <h3>
+                        Memory &amp; Flashback Scenes
+                    </h3>
+
+                    <p>
+                        Some collectibles lead into visual novel-style memory scenes.
+                        These sequences give the player more context about the characters’
+                        relationship and reveal pieces of their past over time.
+                    </p>
+
+                    <p>
+                        I contributed to the writing, design, and implementation of
+                        these scenes, including dialogue, character presentation,
+                        and how the memories are introduced through exploration.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="work-image">
+                        <img src="flashback.png"
+                             alt="Visual novel style flashback scene from A Way Home">
+                    </div>
+
+                    <p class="caption">
+                        A memory scene shown through the game’s visual novel-style dialogue system.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- Work Sample 3 -->
+            <article class="work-item">
+
+                <div>
+                    <div class="work-number">03</div>
+
+                    <h3>
+                        Writing &amp; Dialogue Pipeline
+                    </h3>
+
+                    <p>
+                        Dialogue is organized in a spreadsheet so narrative content
+                        can be edited without rewriting the underlying system.
+                        Entries track information such as speaker, display name,
+                        dialogue, backgrounds, and character states.
+                    </p>
+
+                    <p>
+                        This makes it easier to revise scenes during development.
+                        I can shorten an exchange, change presentation details, and
+                        test the updated version during the next playthrough.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="work-image sheet-image">
+                        <img src="dialogue-sheet.png"
+                             alt="Spreadsheet used to organize dialogue for A Way Home">
+                    </div>
+
+                    <p class="caption">
+                        Part of the spreadsheet used to organize narrative content and dialogue states.
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+    </section>
+
+
+    <!-- Gameplay Demo -->
+    <section id="demo">
+        <div class="container">
+
+            <div class="section-label">Gameplay Demo</div>
+
+            <h2 class="section-title">
+                See the narrative systems in game.
+            </h2>
+
+            <p class="demo-description">
+                This gameplay demo shows narrative content and systems I worked on
+                inside the current vertical slice, including dialogue and memory scenes.
+            </p>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/kiAzsZlpzns"
+                    title="A Way Home – Narrative Design Gameplay Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Play the Game -->
+    <section>
+        <div class="container">
+
+            <div class="section-label">Play the Game</div>
+
+            <div class="play-box">
+
+                <div>
+                    <h3>
+                        A Way Home — Vertical Slice
+                    </h3>
+
+                    <p>
+                        The current vertical slice is available on itch.io.
+                        The build is password protected for the course project.
+                    </p>
+
+                    <a class="button primary"
+                       href="https://amoveftw.itch.io/a-way-home-vertical-slice"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Play on itch.io ↗
+                    </a>
+                </div>
+
+                <div class="password">
+                    <div class="password-label">
+                        Access Password
+                    </div>
+
+                    <p class="password-code">
+                        cmput250
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-inner">
+
+            <div>
+                © Haoran Yan
+            </div>
+
+            <div>
+                Game Writing · Narrative Design
+            </div>
+
+        </div>
+    </footer>
+
 </body>
 </html>
